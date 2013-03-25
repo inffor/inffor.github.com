@@ -1,0 +1,155 @@
+<html>
+<head>
+	<title>Installing Virus</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		//canvas initialization
+		var canvas = document.getElementById("canvas");
+		var ctx = canvas.getContext("2d");
+		//dimensions
+		var W = canvas.width;
+		var H = canvas.height;
+		//Variables
+		var degrees = 0;
+		var new_degrees = 0;
+		var difference = 0;
+		var color = "lightgreen"; //green looks better to me
+		var bgcolor = "#222";
+		var text;
+		var animation_loop, redraw_loop;
+		var name = ["Window$", "firewall", "ip tables config", "dick", "command line", "mess of files", "antivirus", "army of two", "trojan", "worm", "virus", "protection", "condom", "obfuscation", "smile", "battery", "browser", "window manager", "virtual machine", "sandbox", "vpn", "ssh connection", "proxy", "server", navigator.userAgent, "middle finger", "error " + Math.round(Math.random()*45), "life", "computer", "l1nu%", "iShit", "ubuntu", "sex.exe", "punch", "stayAwayVirus.sh", "laser canon", "printer", "mouse", "keyboard", "leopard", "browsing history", "personality", "sluttyness", "porn folder", "bucket of cum", "shit"];
+		
+		var drink = ["liqour", "vodka", "margarita", "dick", "tequila", "whiskey", "liquified tobacco", "cachaca", "cognac", "brandy", "cider", "gin", "rum", "sake", "beer", "absinthe", "wine", "sparkling wine", "port", "chocolate liqueur", "coffee liqueur", "cream liqueur", "fruit liqueur", "cum", "blood", "bitter", "schnapps", "coffee", "scotch", "nail polish", "spirit", "semen", "apple juice", "orange juice", "lager", "kumis", "sangria", "horilka", "brandy", "pisco", "cocktail", "cobbler", "fix", "fizz", "tea", "shit"];
+	
+		function init()
+		{
+			//Clear the canvas everytime a chart is drawn
+			ctx.clearRect(0, 0, W, H);
+		
+			//Background 360 degree arc
+			ctx.beginPath();
+			ctx.strokeStyle = bgcolor;
+			ctx.lineWidth = 30;
+			ctx.arc(W/2, H/2, 100, 0, Math.PI*2, false); //you can see the arc now
+			ctx.stroke();
+		
+			//gauge will be a simple arc
+			//Angle in radians = angle in degrees * PI / 180
+			var radians = degrees * Math.PI / 180;
+			ctx.beginPath();
+			ctx.strokeStyle = color;
+			ctx.lineWidth = 30;
+			//The arc starts from the rightmost end. If we deduct 90 degrees from the angles
+			//the arc will start from the topmost end
+			ctx.arc(W/2, H/2, 100, 0 - 90*Math.PI/180, radians - 90*Math.PI/180, false); 
+			//you can see the arc now
+			ctx.stroke();
+		
+			//Lets add the text
+			ctx.fillStyle = color;
+			ctx.font = "50px Arial";
+			text = Math.floor(degrees/360*100) + "%";
+			//Lets center the text
+			//deducting half of text width from position x
+			text_width = ctx.measureText(text).width;
+			//adding manual value to position y since the height of the text cannot
+			//be measured easily. There are hacks but we will keep it manual for now.
+			ctx.fillText(text, W/2 - text_width/2, H/2 + 15);
+		}
+	
+		function draw()
+		{
+			//Cancel any movement animation if a new chart is requested
+			if(typeof animation_loop != undefined) clearInterval(animation_loop);
+		
+			//random degree from 0 to 360
+			var gopher = Math.round(Math.random()*45);
+			if (gopher + degrees >= 360) {
+				new_degrees = degrees - gopher;
+				if (gopher < 10) {
+					document.getElementById('virus').innerHTML = "WTF!? Your system has a " + name[Math.round(Math.random()*45)] + "!!!???";
+				} else if (gopher >= 10 && gopher <= 30) {
+					document.getElementById('virus').innerHTML = "You have such a weak " + name[Math.round(Math.random()*45)] + " that I can't bypass it!";
+				} else {
+					document.getElementById('virus').innerHTML = "You gave me a " + name[Math.round(Math.random()*45)] + "? You think I can be so easily deterred!?";
+				}
+			} else if (degrees - gopher <= 0) {
+				new_degrees = degrees + gopher;
+				if (gopher < 10) {
+					document.getElementById('virus').innerHTML = "Bypassed your " + name[Math.round(Math.random()*45)] + " with flying success!";
+				} else if (gopher >= 10 && gopher <= 30) {
+					document.getElementById('virus').innerHTML = "I fuggin' <b>SQUASHED</b> your " + name[Math.round(Math.random()*45)] + "!";
+				} else {
+					document.getElementById('virus').innerHTML = "I drank some of your " + drink[Math.round(Math.random()*45)] + ", and got away with hacking your " + name[Math.round(Math.random()*45)] + "! :)";
+				}
+			} else if (gopher % 2 == 0) {
+				new_degrees = degrees - gopher;
+				if (gopher < 10) {
+					document.getElementById('virus').innerHTML = "WTF!? Your system has a " + name[Math.round(Math.random()*45)] + "!!!???";
+				} else if (gopher >= 10 && gopher <= 30) {
+					document.getElementById('virus').innerHTML = "You have such a weak " + name[Math.round(Math.random()*45)] + " that I can't bypass it!";
+				} else {
+					document.getElementById('virus').innerHTML = "You gave me a " + name[Math.round(Math.random()*45)] + "? You think I can be so easily deterred!?";
+				}
+			} else if (gopher % 2 == 1) {
+				new_degrees = degrees + gopher;
+				if (gopher < 10) {
+					document.getElementById('virus').innerHTML = "Bypassed your " + name[Math.round(Math.random()*45)] + " with flying success!";
+				} else if (gopher >= 10 && gopher <= 30) {
+					document.getElementById('virus').innerHTML = "I fuggin' <b>SQUASHED</b> your " + name[Math.round(Math.random()*45)] + "!";
+				} else {
+					document.getElementById('virus').innerHTML = "I drank some of your " + drink[Math.round(Math.random()*45)] + ", and got away with hacking your " + name[Math.round(Math.random()*45)] + "! :)";
+				}
+			}
+			difference = new_degrees - degrees;
+			//This will animate the gauge to new positions
+			//The animation will take 1 second
+			//time for each frame is 1sec / difference in degrees
+			animation_loop = setInterval(animate_to, 1000/difference);
+		}
+	
+		//function to make the chart move to new degrees
+		function animate_to()
+		{
+			//clear animation loop if degrees reaches to new_degrees
+			if(degrees == new_degrees) 
+				clearInterval(animation_loop);
+		
+			if(degrees < new_degrees)
+				degrees++;
+			else
+				degrees--;
+			
+			init();
+		}
+	
+		//Lets add some animation for fun
+		draw();
+		redraw_loop = setInterval(draw, 4000); //Draw a new chart every 2 seconds
+	
+	
+	
+	
+	}
+	</script>
+	<style type="text/css">
+	body {
+		background: #333;
+		font-family: "Arial";
+		color: #fff;
+		text-align: center;
+		font-size: 50px;
+	}
+	/*Centering the gauge*/
+	#canvas {
+		display: block;
+		width: 300px;
+		margin: 100px auto;
+	}
+	</style>
+</head>
+<body>
+	<p id="virus">Installing Virus...</p>
+	<canvas id="canvas" width="300" height="300" />
+</body>
+</html>
