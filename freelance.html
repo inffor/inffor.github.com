@@ -48,7 +48,7 @@
 	div.box > div > span > span {
 		color: #999;
 	}
-	div.box > div > span#r {
+	div.box > div > span.r {
 		float: right;
 	}
 	div#options {
@@ -75,36 +75,48 @@
 		font-size: 200%;
 	}
 	</style>
+	<script type="text/javascript">
+
+	var listing = {
+		add: function(title, price, rating, user, body) {
+			if (price > 5 || price < 0 || rating > 5 || rating < 0) {
+				return "Invalid Input";
+			}
+			var dollars = "";
+			var anti = "$$$$$";
+			while (price > 0) {
+				dollars += "$";
+				anti = anti.substr(1);
+				price--;
+			}
+			if (dollars == "") {
+				dollars = "<span>" + anti + "</span>";
+			} else {
+				dollars = dollars + "<span>" + anti + "</span>";
+			}
+			var rate = "";
+			anti = "+++++";
+			while (rating > 0) {
+				rate += "+";
+				anti = anti.substr(1);
+				rating--;
+			}
+			if (rate == "") {
+				rate = "<span>" + anti + "</span>";
+			} else {
+				rate = rate + "<span>" + anti + "</span>";
+			}
+			var list = document.getElementById('list');
+			list.innerHTML = list.innerHTML + "<div class=\"box\"><h1>" + title + "</h1><div><span>" + dollars + "</span><span onmouseover=\"this.innerHTML = '" + user + "'\" onmouseout=\"this.innerHTML = '" + rate + "'\" class=\"r\">" + rate + "</span></div><p>" + body + "</p></div><br />";
+		}
+	}
+	</script>
 </head>
 <body>
 	<div id="options">this is to be completed<br />There will be search options here.</div>
 	<input type="text" id="text" value="search" />
 	<div id="list">
-		<div class="box">
-			<h1>Make Uriah and Jeremy get married.</h1>
-			<div><span>$$$<span>$$</span></span><span id="r">+++<span>++</span></span></div>
-			<p>This is a project that requires intensive care, agility, and payment. Make sure to bring pliers, scissors, bolt cutters, a match, some erotic music, an ax, candles, Chinese takeout menu, fire alarm, fire escape ladder, cattle prod, AK-47, a tank, a game of cards, oil, a bed, a house, $709 spending money, a lamp, a taser, a second taser, electric fence, dog collar, a bag, and 78 sets of matching clothes.</p>
-		</div><br />
-		<div class="box">
-			<h1>Dream about inception.</h1>
-			<div><span>$<span>$$$$</span></span><span id="r"><span>+++++</span></span></div>
-			<p>You're waiting for a train, a train that will take you far away. You know where you hope this train will take you, but you don't know for sure. But it doesn't matter.</p>
-		</div><br />
-		<div class="box">
-			<h1>domeverything for me.</h1>
-			<div><span>$$$$$<span></span></span><span id="r">++++<span>+</span></span></div>
-			<p>i am five yywars old and i need yiu to doeverythi g for me. walk mt dog. teachmy teacher correct arithmatic, tell my mom and dad was is correct social behavior and what is not corret social behaviour. thix is a very important jo  and it ys well out of my dads credit card whoch has an infinotne amout of money until april 15th it seems. i am basedn in the usa. maine to bve preice. turst me that without this jopb the entire balance of the world will fall apart. i need an ansswer witting one minutted.</p>
-		</div><br />
-		<div class="box">
-			<h1>Take out relax's life force.</h1>
-			<div><span>$$$$<span>$</span></span><span id="r">+<span>++++</span></span></div>
-			<p>You will first use the eyeball of zeuz to locate relax's location. then you will fly there in 7th class on an airplane. parachute down through the bathroom, and nuke the suckers house to oblivion. find the sucker and start jerking him off until he has no more cum left. then cut off his penis and post a picture to yahoo answers. then crush his balls and put them in a Blendtec blend. record a video of "will it blend". Then buy a vampire on the black market and ask him to suck his blood dry. then string out relax's muscles and sell them as fish fingers and custard. USE REAL CUSTARD! Payment is never to be received.</p>
-		</div>
-		<div class="box">
-			<h1>Make a program that manages my finances.</h1>
-			<div><span>$$$$$<span></span></span><span id="r">+++++</span></div>
-			<p>This is a top paying job. It requires that you know a little bit about my lifestyle. First, it has to have my name, Wabi, appear as soon as I open it. It's a requirement of almost every program I use except Ice-weasel. Then it should manage my taxes for me, and figure out who I should fire from Wabi Sheldon Incooperated, my company. Then it should hire some jerks off of Wall Street and Floor Street for me. It's the subtleties that count. Then make it manage my extra-curricular activities like orgasm parties, gangbangs, and general sex parties. It should also manage my speakeasy that I'm running since 2 years after Christ was born, my baby. Then there should be a tab to manage my wine. I keep a huge collection of wine, whiskey, and hard liquor. I need to buy 1 kilogram of sugar every day to add to the whiskey. Make it refined sugar, as it refined taste. Then make it manage my publishing company, which requires that nothing except books come in, and only blank pages come out. It's a crucial part of the environment, like trees and oxygen. My bed and breakfast also need to be managed. All negative reviewers must be bribed to make their reviews positive. You see, it seems like many people don't like to sleep in a huge bowl of cereal, and seemingly don't eat beds... Even <b>I</b> can't see what's wrong with that! And don't forget that my sister, Katie, requires a daily payment of $78,009,837,673,729 for her key-motel-therapy session, or something. And my dog requires financing too. He has his own account. The rest of the dogs I own share one account. The cats share 1 account per every two cats, except the triplet, they have 4 cats sharing one account. You also need to have it manage my lavatory human experimentation expenses. I am perfecting the poo throne! Oh! I almost forgot, the last thing that I forgot to mention, except for the flights to the moon, the designer purchases, and the daily shopping, is my butler. Do this, and you will be paid the handsome sum of a huge dollar!</p>
-		</div>
+		
 	</div>
 </body>
 </html>
