@@ -57,6 +57,9 @@
 		height: 99%;
 		z-index: 1;
 	}
+	div#options > span {
+		font-size: 180%;
+	}
 	div#list {
 		position: absolute;
 		z-index: 0;
@@ -80,17 +83,15 @@
 		add: function(type, name, values) {
 			var opts = document.getElementById('options');
 			var l = values.length;
-			var product = "<h4>" + name + "</h4>:<br />";
+			opts.innerHTML +=  "<span>" + name + ":</span><br />";
 			if (type == "check") {
 				for (var i = 0; i < l; i++) {
-					product += "<input type=\"checkbox\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
+					opts.innerHTML +=  "<input type=\"checkbox\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
 				}
 			} else if (type == "radio") {
 				for (var i = 0; i < l; i++) {
-					product += "<input type=\"radio\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
+					opts.innerHTML += "<input type=\"radio\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
 				}
-			} else {
-				Console.log("Type " + type + " is not a valid type. The two valid types are \"check\" and \"radio\".");
 			}
 		}
 	}
