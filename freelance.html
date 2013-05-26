@@ -76,7 +76,24 @@
 	}
 	</style>
 	<script type="text/javascript">
-
+	var options = {
+		add: function(type, name, values) {
+			var opts = document.getElementById('options');
+			var l = values.length();
+			var product = "<h4>" + name + "</h4>:<br />";
+			if (type == "check") {
+				for (var i = 0; i < l; i++) {
+					product += "<input type=\"checkbox\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
+				}
+			} else if (type == "radio") {
+				for (var i = 0; i < l; i++) {
+					product += "<input type=\"radio\" name=\"" + name + "\" value=\"" + values[i] + "\" /> " + values[i] + "<br />";
+				}
+			} else {
+				Console.log("Type " + type + " is not a valid type. The two valid types are \"check\" and \"radio\".");
+			}
+		}
+	}
 	var listing = {
 		add: function(title, price, rating, user, body) {
 			if (price > 5 || price < 0 || rating > 5 || rating < 0) {
@@ -113,7 +130,7 @@
 	</script>
 </head>
 <body>
-	<div id="options">this is to be completed<br />There will be search options here.</div>
+	<div id="options"></div>
 	<input type="text" id="text" value="search" />
 	<div id="list">
 		
