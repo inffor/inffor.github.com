@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Table Function</title>
+	<script type="text/javascript">
+	var Table = {
+		tbodyAddRight: function(tbody_id, array) {
+			var tbody = document.getElementById(tbody_id);
+			var array_len = array.length;
+			var tbodyTr = tbody.children;
+			var tbodyTr_len = tbodyTr.length;
+			for (var i = 0; i < array_len; i++) {
+				tbodyTr[i].innerHTML += "<td>" + array[i] + "</td>";	
+			}
+			if (array_len < tbodyTr_len) {
+				for (var i = array_len; i < tbodyTr_len; i++) {
+					tbodyTr[i].innerHTML += "<td></td>";
+				}
+			}
+		},
+		tbodyAddLeft: function(tbody_id, array) {
+			var tbody = document.getElementById(tbody_id);
+			var array_len = array.length;
+			var tbodyTr = tbody.children;
+			var tbodyTr_len = tbodyTr.length;
+			for (var i = 0; i < array_len; i++) {
+				tbodyTr[i].innerHTML = "<td>" + array[i] + "</td>" + tbodyTr[i].innerHTML;	
+			}
+			if (array_len < tbodyTr_len) {
+				for (var i = array_len; i < tbodyTr_len; i++) {
+					tbodyTr[i].innerHTML = "<td></td>" + tbodyTr[i].innerHTML;
+				}
+			}
+		},
+		tbodyAddUp: function(tbody_id, array) {
+			var tbody = document.getElementById(tbody_id);
+			var array_len = array.length;
+			tbody.innerHTML = "<tr></tr>" + tbody.innerHTML;
+			var tbodyTr = tbody.children;
+			var tbodyTr_len = tbodyTr[1].children.length;
+			for (var i = 0; i < array_len; i++) {
+				tbodyTr[0].innerHTML += "<td>" + array[i] + "</td>";
+			}
+			if (array_len < tbodyTr_len) {
+				for (var i = array_len; i < tbodyTr_len; i++) {
+					tbodyTr[0].innerHTML += "<td></td>";
+				}
+			}
+		},
+		tbodyAddDown: function(tbody_id, array) {
+			var tbody = document.getElementById(tbody_id);
+			var array_len = array.length;
+			tbody.innerHTML += "<tr></tr>";
+			var tbodyTr = tbody.children;
+			var tbodyTr_len = tbodyTr[0].children.length;
+			var tbodyTr_index = tbodyTr.length - 1;
+			for (var i = 0; i < array_len; i++) {
+				tbodyTr[tbodyTr_index].innerHTML += "<td>" + array[i] + "</td>";
+			}
+			if (array_len < tbodyTr_len) {
+				for (var i = array_len; i < tbodyTr_len; i++) {
+					tbodyTr[tbodyTr_index].innerHTML += "<td></td>";
+				}
+			}
+		},
+		removeRow: function(tbody_id, row) {
+			var tbody = document.getElementById(tbody_id);
+			tbody.removeChild(tbody.children[row]);
+		},
+		removeCol: function(tbody_id, col) {
+			var tbody = document.getElementById(tbody_id);
+			var tbody_len = tbody.children.length;
+			for (var i = 0; i < tbody_len; i++) {
+				tbody.children[i].removeChild(tbody.children[i].children[col]);
+			}
+		},
+		edit: function(tbody_id, new_value, x, y) {
+			var tbody = document.getElementById(tbody_id);
+			tbody.children[y].children[x].innerHTML = new_value;
+		}
+	}
+	</script>
+</head>
+<body>
+	<table style="border: 1px solid gray">
+		<tbody id="fred">
+			<tr>
+				<td>YOUR TOAST!</td>
+				<td>Test</td>
+			</tr>
+			<tr>
+				<td>tax collector</td>
+				<td>toast</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
