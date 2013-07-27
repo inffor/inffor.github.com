@@ -1,10 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Table Function</title>
+	<title>Table Function</title>
+	<style type="text/css">
+	#edit_menu {
+		vertical-align: top;
+		border: 1px dotted black;
+		text-align: center;
+		width: 100px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 5px 0px 5px 0px;
+	}
+	</style>
 	<script type="text/javascript">
 	var Table = {
-		tbodyAddRight: function(tbody_id, array) {
+		tbodyAddRight: function(tbody_id, array, filler) {
 			var tbody = document.getElementById(tbody_id);
 			var array_len = array.length;
 			var tbodyTr = tbody.children;
@@ -14,11 +25,11 @@
 			}
 			if (array_len < tbodyTr_len) {
 				for (var i = array_len; i < tbodyTr_len; i++) {
-					tbodyTr[i].innerHTML += "<td></td>";
+					tbodyTr[i].innerHTML += "<td>" + filler + "</td>";
 				}
 			}
 		},
-		tbodyAddLeft: function(tbody_id, array) {
+		tbodyAddLeft: function(tbody_id, array, filler) {
 			var tbody = document.getElementById(tbody_id);
 			var array_len = array.length;
 			var tbodyTr = tbody.children;
@@ -28,11 +39,11 @@
 			}
 			if (array_len < tbodyTr_len) {
 				for (var i = array_len; i < tbodyTr_len; i++) {
-					tbodyTr[i].innerHTML = "<td></td>" + tbodyTr[i].innerHTML;
+					tbodyTr[i].innerHTML = "<td>" + filler + "</td>" + tbodyTr[i].innerHTML;
 				}
 			}
 		},
-		tbodyAddUp: function(tbody_id, array) {
+		tbodyAddUp: function(tbody_id, array, filler) {
 			var tbody = document.getElementById(tbody_id);
 			var array_len = array.length;
 			tbody.innerHTML = "<tr></tr>" + tbody.innerHTML;
@@ -43,11 +54,11 @@
 			}
 			if (array_len < tbodyTr_len) {
 				for (var i = array_len; i < tbodyTr_len; i++) {
-					tbodyTr[0].innerHTML += "<td></td>";
+					tbodyTr[0].innerHTML += "<td>" + filler + "</td>";
 				}
 			}
 		},
-		tbodyAddDown: function(tbody_id, array) {
+		tbodyAddDown: function(tbody_id, array, filler) {
 			var tbody = document.getElementById(tbody_id);
 			var array_len = array.length;
 			tbody.innerHTML += "<tr></tr>";
@@ -59,7 +70,7 @@
 			}
 			if (array_len < tbodyTr_len) {
 				for (var i = array_len; i < tbodyTr_len; i++) {
-					tbodyTr[tbodyTr_index].innerHTML += "<td></td>";
+					tbodyTr[tbodyTr_index].innerHTML += "<td>" + filler + "</td>";
 				}
 			}
 		},
@@ -77,20 +88,73 @@
 		edit: function(tbody_id, new_value, x, y) {
 			var tbody = document.getElementById(tbody_id);
 			tbody.children[y].children[x].innerHTML = new_value;
+		},
+		toggleContentEditable: function(tbody_id) {
+			var tbody = document.getElementById(tbody_id);
+			if (tbody.getAttribute("contenteditable") == "true") {
+				tbody.setAttribute("contenteditable", "false");
+			} else {
+				tbody.setAttribute("contenteditable", "true");
+			}
+		},
+		save: function(tbody_id) {
+			var data = document.getElementById(tbody_id);
+			// send the variable "data", thanks
+
+			/*
+			##############################################################################
+			##############################################################################
+			################################# I N S E R T ################################
+			##############################################################################
+			##############################################################################
+			######### A J A X ############################################################
+			##############################################################################
+			################################################## H E R E ###################
+			##############################################################################
+			################## :) ########################################################
+			##############################################################################
+			##############################################################################
+			*/
+		},
+		load: function(tbody_id) {
+			// set a variable called "data", please
+
+			/*
+			##############################################################################
+			##############################################################################
+			################################# I N S E R T ################################
+			##############################################################################
+			##############################################################################
+			######### A J A X ############################################################
+			##############################################################################
+			################################################## H E R E ###################
+			##############################################################################
+			################## :) ########################################################
+			##############################################################################
+			##############################################################################
+			*/
+			document.getElementById(tbody_id).innerHTML = data;
 		}
 	}
 	</script>
 </head>
 <body>
+	<div id="edit_menu">
+		<input type="button" onclick="Table.tbodyAddUp('tbody', [], '&#9675;')" value="+" /><br />
+		<input type="button" onclick="Table.tbodyAddLeft('tbody', [], '&#9675;')" value="+" />
+		<input type="button" onclick="Table.tbodyAddRight('tbody', [], '&#9675;')" value="+" /><br />
+		<input type="button" onclick="Table.tbodyAddDown('tbody', [], '&#9675;')" value="+" /><br /><br />
+		<input type="button" onclick="Table.save('tbody');" value="Save" />
+	</div><br /><br />
 	<table style="border: 1px solid gray">
-		<tbody id="fred">
+		<tbody id="tbody" contenteditable="true">
 			<tr>
-				<td>YOUR TOAST!</td>
-				<td>Test</td>
+				<td>&#x2665;</td>
+				<td>&#x2665;</td>
 			</tr>
 			<tr>
-				<td>tax collector</td>
-				<td>toast</td>
+				<td>&#x2665;</td>
+				<td>&#x2665;</td>
 			</tr>
 		</tbody>
 	</table>
