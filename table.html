@@ -7,7 +7,7 @@
 		vertical-align: top;
 		border: 1px dotted black;
 		text-align: center;
-		width: 100px;
+		width: 140px;
 		margin-left: auto;
 		margin-right: auto;
 		padding: 5px 0px 5px 0px;
@@ -134,6 +134,29 @@
 			##############################################################################
 			*/
 			document.getElementById(tbody_id).innerHTML = data;
+		},
+		toggleDeleteMenu: function(tbody_id) {
+			var tbody = document.getElementById(tbody_id);
+			var edit_menu_delete_row_column = document.getElementById('edit_menu_delete_row_column');
+			Table.toggleContentEditable(tbody_id);
+			if (edit_menu_delete_row_column.value == "Delete Row/Column") {
+				edit_menu_delete_row_column.value = "Cancel Delete";
+				var tbodyTr = tbody.children;
+				var tbodyTr_len = tbodyTr.length;
+				for (var i = 0; i < tbodyTr_len; i++) {
+					tbodyTr[i].innerHTML = "<td><input type='button' onclick=\"Table.removeRow('" + tbody_id + "', " + (i+1) + "); Table.toggleDeleteMenu('" + tbody_id + "');\" value='X' /></td>" + tbodyTr[i].innerHTML;	
+				}
+				tbody.innerHTML = "<tr></tr>" + tbody.innerHTML;
+				var tbodyTr = tbody.children;
+				var tbodyTr_len = tbodyTr[1].children.length;
+				tbodyTr[0].innerHTML += "<td></td>";
+				for (var i = 1; i < tbodyTr_len; i++) {
+					tbodyTr[0].innerHTML += "<td><input type='button' onclick=\"Table.removeCol('" + tbody_id + "', " + i + "); Table.toggleDeleteMenu('" + tbody_id + "');\" value='X' /></td>";
+				}
+			} else {
+				edit_menu_delete_row_column.value = "Delete Row/Column";
+				Table.removeRow(tbody_id, 0); Table.removeCol(tbody_id, 0);
+			}
 		}
 	}
 	</script>
@@ -144,7 +167,8 @@
 		<input type="button" onclick="Table.tbodyAddLeft('tbody', [], '&#9675;')" value="+" />
 		<input type="button" onclick="Table.tbodyAddRight('tbody', [], '&#9675;')" value="+" /><br />
 		<input type="button" onclick="Table.tbodyAddDown('tbody', [], '&#9675;')" value="+" /><br /><br />
-		<input type="button" onclick="Table.save('tbody');" value="Save" />
+		<input id="edit_menu_delete_row_column" type="button" onclick="Table.toggleDeleteMenu('tbody')" value="Delete Row/Column" /><br />
+		<input type="button" onclick="Table.save('tbody');" value="Save Table" />
 	</div><br /><br />
 	<table style="border: 1px solid gray">
 		<tbody id="tbody" contenteditable="true">
