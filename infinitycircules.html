@@ -1,0 +1,83 @@
+<html>
+<head>
+  <title>Enlightenment Research LLC</title>
+	<style type="text/css">
+	@font-face {
+		font-family: 'URW Chancery L';
+		src: local('URW Chancery L'), url('http://db.tt/Igm6I7i9') format('truetype');
+	}
+	#c {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+	}
+	#l {
+		text-align: center;
+		font-family: 'URW Chancery L';
+	}
+	</style>
+	<script type="text/javascript">
+	var min, hh, hw, can, c, l;
+	function reset() {
+		can.width = document.width*.6;
+		can.height = document.height*.6;
+		
+		hh = can.height/2;
+		hw = can.width/2;
+		min = Math.min(hw,hh);
+		
+		can.style.marginLeft= -hw+"px";
+		can.style.marginTop= -hh+"px";
+		l.style.fontSize = min/4+"px"
+		l.style.marginTop = document.height/2-min+min/1.5;
+		
+		c.beginPath();
+		c.arc(hw, hh, min-2, -.37*Math.PI, 1.16*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-3, -.37*Math.PI, 1.16*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-5, -.45*Math.PI, 1.2*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-6, -.44*Math.PI, 1.15*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-7, -.43*Math.PI, 1.13*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-8, -.42*Math.PI, 1.11*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-9, -.41*Math.PI, 1.09*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-10, .41*Math.PI, .585*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-11, .43*Math.PI, .6*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-12, .35*Math.PI, .76*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-13, -.3*Math.PI, 1.3*Math.PI);
+		c.stroke();
+		c.beginPath();
+		c.arc(hw, hh, min-14, -.1*Math.PI, 1.07*Math.PI);
+		c.stroke();
+	}
+	function setup() {
+		can=document.getElementById("c");
+		c=can.getContext("2d");
+		l=document.getElementById("l");
+		reset();
+	}
+	</script>
+</head>
+<body onresize="reset()" onload="setup()">
+	<canvas id="c" width="200" height="200">Please enable JS. If JS is enabled, then get a newer browser.</canvas>
+	<p id="l">infinity<br /><br />circles</p>
+</body>
+</html>
